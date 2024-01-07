@@ -1,5 +1,4 @@
 #include "log.h"
-#include <mutex>
 
 Log::Log() {
     m_lineCount = 0;
