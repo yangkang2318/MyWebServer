@@ -11,8 +11,8 @@ private:
     std::condition_variable m_cond;
 
 public:
-    Semaphore();
-    ~Semaphore();
+    Semaphore(){};
+    ~Semaphore(){};
 
     void InitSem(int count) {
         m_count = count;
