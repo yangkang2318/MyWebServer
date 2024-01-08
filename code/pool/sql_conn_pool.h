@@ -34,22 +34,22 @@ public:
 class SqlConnRAII
 {
 public:
-    SqlConnRAII(MYSQL **sql, SqlConnPool *connpool) {
-        assert(connpool);
-        *sql = connpool->GetConn();
-        sql_ = *sql;
-        connpool_ = connpool;
+    SqlConnRAII(MYSQL **sql, SqlConnPool *connPool) {
+        assert(connPool);
+        *sql = connPool->GetConn();
+        m_sql = *sql;
+        m_connPool = connPool;
     }
 
     ~SqlConnRAII() {
-        if (sql_) {
-            connpool_->FreeConn(sql_);
+        if (m_sql) {
+            m_connPool->FreeConn(m_sql);
         }
     }
 
 private:
-    MYSQL *sql_;
-    SqlConnPool *connpool_;
+    MYSQL *m_sql;
+    SqlConnPool *m_connPool;
 };
 
 #endif // !SQL_CONN_POOL_H
