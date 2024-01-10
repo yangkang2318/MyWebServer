@@ -26,6 +26,7 @@ public:
     std::string GetVersion() const;
     std::string GetPost(const std::string &key) const;
     std::string GetPost(const char *key) const;
+    bool IsKeepAlive() const;
     /*
     todo
     void HttpConn::ParseFormData() {}

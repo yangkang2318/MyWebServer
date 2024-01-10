@@ -85,6 +85,13 @@ std::string HttpRequest::GetPost(const char *key) const {
     return "";
 }
 
+bool HttpRequest::IsKeepAlive() const {
+    if (m_header.count("Connection") == 1) {
+        return m_header.find("Connection")->second == "keep-alive" && m_version == "1.1";
+    }
+    return false;
+}
+
 bool HttpRequest::ParseRequestLine(const std::string &line) {
     std::regex patten("^([^ ]*) ([^ ]*) HTTP/([^ ]*)$");
     std::smatch subMatch; // std::smatch 类型表示一个正则表达式匹配结果的集合
