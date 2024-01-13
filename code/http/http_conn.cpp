@@ -62,6 +62,7 @@ ssize_t HttpConn::Read(int *saveErrno) {
             break;
         }
     } while (isET); // ET模式要求程序必须立即处理事件，因此要一次性从fd中读取完数据
+    return len;
 }
 
 ssize_t HttpConn::Write(int *saveErrno) {
