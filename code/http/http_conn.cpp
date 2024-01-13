@@ -61,13 +61,13 @@ ssize_t HttpConn::Read(int *saveErrno) {
         if (len <= 0) {
             break;
         }
-    } while (isET);
-    return len;
+    } while (isET); // ET模式要求程序必须立即处理事件，因此要一次性从fd中读取完数据
 }
 
 ssize_t HttpConn::Write(int *saveErrno) {
     ssize_t len = -1;
     do {
+        /*集中写，将写缓冲区和文件中的内容一并写入m_fd中*/
         len = writev(m_fd, m_iov, m_iovCnt);
         if (len <= 0) {
             *saveErrno = errno;
@@ -87,7 +87,7 @@ ssize_t HttpConn::Write(int *saveErrno) {
             m_iov[0].iov_len -= len;
             m_writeBuff.Retrieve(len);
         }
-    } while (isET || ToWriteBytes() > 10240);
+    } while (isET || ToWriteBytes() > 10240); //当ET模式或要写入的字节过大，必须一次性向fd中写完数据
     return len;
 }
 
@@ -101,6 +101,7 @@ bool HttpConn::Process() {
     } else {
         m_response.Init(srcDir, m_request.GetPath(), false, 400);
     }
+    /*集中写*/
     m_response.Respond(m_writeBuff);
     m_iov[0].iov_base = const_cast<char *>(m_writeBuff.Peek());
     m_iov[0].iov_len = m_writeBuff.ReadableBytes();

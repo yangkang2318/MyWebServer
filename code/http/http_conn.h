@@ -21,6 +21,8 @@ private:
 public:
     static bool isET;
     static const char *srcDir;
+    /*原子对象的主要特征是，从不同的线程访问这个包含的值不会导致数据竞争
+     *（即，这样做是明确定义的行为，访问正确排序）*/
     static std::atomic<int> userCount;
 
     HttpConn();
@@ -30,7 +32,9 @@ public:
     sockaddr_in GetAddr() const;
     const char *GetIP() const;
     int GetPort() const;
+    /*初始化*/
     void Init(int sockFd, const sockaddr_in &addr);
+    /*解析接收的请求报文，并准备响应报文*/
     bool Process();
     /*从m_fd中接收数据*/
     ssize_t Read(int *saveErrno);
