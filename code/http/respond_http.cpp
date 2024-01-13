@@ -1,6 +1,4 @@
 #include "respond_http.h"
-#include <string>
-#include <sys/stat.h>
 
 using namespace std;
 
