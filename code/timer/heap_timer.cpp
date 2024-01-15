@@ -6,8 +6,9 @@ void HeapTimer::Siftup(size_t i) {
     size_t j = (i - 1) / 2; //父节点
     while (j >= 0) {
         if (m_heap[j] < m_heap[i]) {
-            SwapNode(i, j);
+            break;
         }
+        SwapNode(i, j);
         i = j;
         j = (i - 1) / 2;
     }
