@@ -43,6 +43,9 @@ public:
     int ToWriteBytes() {
         return m_iov[0].iov_len + m_iov[1].iov_len;
     }
+    bool IsKeepAlive() const {
+        return m_request.IsKeepAlive();
+    }
 };
 
 #endif // !HTTP_CONN_H
