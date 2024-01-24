@@ -38,7 +38,7 @@
 ```
 ## 项目运行
 1. 在项目根目录下，运行`make`命令编译构建可执行程序
-2. 终端运行`./bin/server \<port> \<threadNum> \<connPoolNum>`，参数分别为端口，线程数，连接池数，例如`./bin/server 1316 16 16`
+2. 终端运行`./bin/server <port> <threadNum> <connPoolNum>`，参数分别为端口，线程数，连接池数，例如`./bin/server 1316 16 16`
 ## 压力测试
 1. `cd ./webbench-1.5`
 2. `make`编译
