@@ -1,7 +1,5 @@
 #ifndef SERVER_H
 #define SERVER_H
-#include <unistd.h>
-
 #include "../http/http_conn.h"
 #include "../log/log.h"
 #include "../pool/sql_conn_pool.h"
@@ -14,6 +12,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <unordered_map>
+
 class Server
 {
 private:
